@@ -1,8 +1,8 @@
 package com.wordnik.client.api
 
-import com.wordnik.client.model.Inline_response_200_7
-import com.wordnik.client.model.Inline_response_200_28
-import com.wordnik.client.model.Update
+import com.wordnik.client.model.Inline_response_200_6
+import com.wordnik.client.model.TrackingReminder
+import com.wordnik.client.model.Inline_response_200_23
 import com.wordnik.client.model.Inline_response_200_2
 
 import java.io.File
@@ -16,14 +16,14 @@ import org.scalatra.servlet.{FileUploadSupport, MultipartConfig, SizeConstraintE
 
 import scala.collection.JavaConverters._
 
-class UpdateApi (implicit val swagger: Swagger) extends ScalatraServlet 
+class TrackingReminderApi (implicit val swagger: Swagger) extends ScalatraServlet 
     with FileUploadSupport
     with JacksonJsonSupport
     with SwaggerSupport {
   protected implicit val jsonFormats: Formats = DefaultFormats
 
-  protected val applicationDescription: String = "UpdateApi"
-  override protected val applicationName: Option[String] = Some("Update")
+  protected val applicationDescription: String = "TrackingReminderApi"
+  override protected val applicationName: Option[String] = Some("TrackingReminder")
 
   before() {
     contentType = formats("json")
@@ -31,14 +31,18 @@ class UpdateApi (implicit val swagger: Swagger) extends ScalatraServlet
   }
   
 
-  val updatesGetOperation = (apiOperation[Inline_response_200_7]("updatesGet")
-      summary "Get all Updates"
+  val trackingRemindersGetOperation = (apiOperation[Inline_response_200_6]("trackingRemindersGet")
+      summary "Get tracking reminders"
       parameters(queryParam[String]("accessToken").description("").optional,
+        queryParam[String]("clientId").description("").optional,
         queryParam[Int]("userId").description("").optional,
-        queryParam[Int]("connectorId").description("").optional,
-        queryParam[Int]("numberOfMeasurements").description("").optional,
-        queryParam[Boolean]("success").description("").optional,
-        queryParam[String]("message").description("").optional,
+        queryParam[Int]("variableId").description("").optional,
+        queryParam[Boolean]("popUp").description("").optional,
+        queryParam[Boolean]("sms").description("").optional,
+        queryParam[Boolean]("email").description("").optional,
+        queryParam[Boolean]("notificationBar").description("").optional,
+        queryParam[String]("lastReminded").description("").optional,
+        queryParam[String]("lastTracked").description("").optional,
         queryParam[String]("createdAt").description("").optional,
         queryParam[String]("updatedAt").description("").optional,
         queryParam[Int]("limit").description("").optional,
@@ -46,7 +50,7 @@ class UpdateApi (implicit val swagger: Swagger) extends ScalatraServlet
         queryParam[String]("sort").description("").optional)
   )
 
-  get("/updates",operation(updatesGetOperation)) {
+  get("/trackingReminders",operation(trackingRemindersGetOperation)) {
     
     
     
@@ -62,6 +66,16 @@ class UpdateApi (implicit val swagger: Swagger) extends ScalatraServlet
     
         
       
+      val clientId = params.getAs[String]("clientId")
+            
+
+    
+    println("clientId: " + clientId)
+  
+    
+    
+        
+      
       val userId = params.getAs[Int]("userId")
             
 
@@ -72,41 +86,71 @@ class UpdateApi (implicit val swagger: Swagger) extends ScalatraServlet
     
         
       
-      val connectorId = params.getAs[Int]("connectorId")
+      val variableId = params.getAs[Int]("variableId")
             
 
     
-    println("connectorId: " + connectorId)
+    println("variableId: " + variableId)
   
     
     
         
       
-      val numberOfMeasurements = params.getAs[Int]("numberOfMeasurements")
+      val popUp = params.getAs[Boolean]("popUp")
             
 
     
-    println("numberOfMeasurements: " + numberOfMeasurements)
+    println("popUp: " + popUp)
   
     
     
         
       
-      val success = params.getAs[Boolean]("success")
+      val sms = params.getAs[Boolean]("sms")
             
 
     
-    println("success: " + success)
+    println("sms: " + sms)
   
     
     
         
       
-      val message = params.getAs[String]("message")
+      val email = params.getAs[Boolean]("email")
             
 
     
-    println("message: " + message)
+    println("email: " + email)
+  
+    
+    
+        
+      
+      val notificationBar = params.getAs[Boolean]("notificationBar")
+            
+
+    
+    println("notificationBar: " + notificationBar)
+  
+    
+    
+        
+      
+      val lastReminded = params.getAs[String]("lastReminded")
+            
+
+    
+    println("lastReminded: " + lastReminded)
+  
+    
+    
+        
+      
+      val lastTracked = params.getAs[String]("lastTracked")
+            
+
+    
+    println("lastTracked: " + lastTracked)
   
     
     
@@ -162,13 +206,13 @@ class UpdateApi (implicit val swagger: Swagger) extends ScalatraServlet
 
   
 
-  val updatesPostOperation = (apiOperation[Inline_response_200_28]("updatesPost")
-      summary "Store Update"
+  val trackingRemindersPostOperation = (apiOperation[Inline_response_200_23]("trackingRemindersPost")
+      summary "Store TrackingReminder"
       parameters(queryParam[String]("accessToken").description("").optional,
-        bodyParam[Update]("body").description("").optional)
+        bodyParam[TrackingReminder]("body").description("").optional)
   )
 
-  post("/updates",operation(updatesPostOperation)) {
+  post("/trackingReminders",operation(trackingRemindersPostOperation)) {
     
     
     
@@ -183,7 +227,7 @@ class UpdateApi (implicit val swagger: Swagger) extends ScalatraServlet
     
     
                 
-bodyParam[Update]("body").description("").optional
+bodyParam[TrackingReminder]("body").description("").optional
     
     println("body: " + body)
   
@@ -191,13 +235,13 @@ bodyParam[Update]("body").description("").optional
 
   
 
-  val updatesIdGetOperation = (apiOperation[Inline_response_200_28]("updatesIdGet")
-      summary "Get Update"
+  val trackingRemindersIdGetOperation = (apiOperation[Inline_response_200_23]("trackingRemindersIdGet")
+      summary "Get TrackingReminder"
       parameters(pathParam[Int]("id").description(""),
         queryParam[String]("accessToken").description("").optional)
   )
 
-  get("/updates/{id}",operation(updatesIdGetOperation)) {
+  get("/trackingReminders/{id}",operation(trackingRemindersIdGetOperation)) {
     
     
     
@@ -221,14 +265,14 @@ bodyParam[Update]("body").description("").optional
 
   
 
-  val updatesIdPutOperation = (apiOperation[Inline_response_200_2]("updatesIdPut")
-      summary "Update Update"
+  val trackingRemindersIdPutOperation = (apiOperation[Inline_response_200_2]("trackingRemindersIdPut")
+      summary "Update TrackingReminder"
       parameters(pathParam[Int]("id").description(""),
         queryParam[String]("accessToken").description("").optional,
-        bodyParam[Update]("body").description("").optional)
+        bodyParam[TrackingReminder]("body").description("").optional)
   )
 
-  put("/updates/{id}",operation(updatesIdPutOperation)) {
+  put("/trackingReminders/{id}",operation(trackingRemindersIdPutOperation)) {
     
     
     
@@ -251,7 +295,7 @@ bodyParam[Update]("body").description("").optional
     
     
                 
-bodyParam[Update]("body").description("").optional
+bodyParam[TrackingReminder]("body").description("").optional
     
     println("body: " + body)
   
@@ -259,13 +303,13 @@ bodyParam[Update]("body").description("").optional
 
   
 
-  val updatesIdDeleteOperation = (apiOperation[Inline_response_200_2]("updatesIdDelete")
-      summary "Delete Update"
+  val trackingRemindersIdDeleteOperation = (apiOperation[Inline_response_200_2]("trackingRemindersIdDelete")
+      summary "Delete TrackingReminder"
       parameters(pathParam[Int]("id").description(""),
         queryParam[String]("accessToken").description("").optional)
   )
 
-  delete("/updates/{id}",operation(updatesIdDeleteOperation)) {
+  delete("/trackingReminders/{id}",operation(trackingRemindersIdDeleteOperation)) {
     
     
     

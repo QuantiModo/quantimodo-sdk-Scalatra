@@ -1,8 +1,8 @@
 package com.wordnik.client.api
 
-import com.wordnik.client.model.Inline_response_200_25
+import com.wordnik.client.model.Inline_response_200_10
 import com.wordnik.client.model.VariableUserSource
-import com.wordnik.client.model.Inline_response_200_26
+import com.wordnik.client.model.Inline_response_200_33
 import com.wordnik.client.model.Inline_response_200_2
 
 import java.io.File
@@ -31,11 +31,14 @@ class VariableUserSourceApi (implicit val swagger: Swagger) extends ScalatraServ
   }
   
 
-  val variableUserSourcesGetOperation = (apiOperation[Inline_response_200_25]("variableUserSourcesGet")
+  val variableUserSourcesGetOperation = (apiOperation[Inline_response_200_10]("variableUserSourcesGet")
       summary "Get all VariableUserSources"
-      parameters(queryParam[Int]("variableId").description("").optional,
+      parameters(queryParam[String]("accessToken").description("").optional,
+        queryParam[Int]("variableId").description("").optional,
         queryParam[Int]("userId").description("").optional,
         queryParam[Int]("timestamp").description("").optional,
+        queryParam[Int]("earliestMeasurementTime").description("").optional,
+        queryParam[Int]("latestMeasurementTime").description("").optional,
         queryParam[String]("createdAt").description("").optional,
         queryParam[String]("updatedAt").description("").optional,
         queryParam[Int]("limit").description("").optional,
@@ -45,6 +48,16 @@ class VariableUserSourceApi (implicit val swagger: Swagger) extends ScalatraServ
 
   get("/variableUserSources",operation(variableUserSourcesGetOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
         
@@ -74,6 +87,26 @@ class VariableUserSourceApi (implicit val swagger: Swagger) extends ScalatraServ
 
     
     println("timestamp: " + timestamp)
+  
+    
+    
+        
+      
+      val earliestMeasurementTime = params.getAs[Int]("earliestMeasurementTime")
+            
+
+    
+    println("earliestMeasurementTime: " + earliestMeasurementTime)
+  
+    
+    
+        
+      
+      val latestMeasurementTime = params.getAs[Int]("latestMeasurementTime")
+            
+
+    
+    println("latestMeasurementTime: " + latestMeasurementTime)
   
     
     
@@ -129,13 +162,24 @@ class VariableUserSourceApi (implicit val swagger: Swagger) extends ScalatraServ
 
   
 
-  val variableUserSourcesPostOperation = (apiOperation[Inline_response_200_26]("variableUserSourcesPost")
+  val variableUserSourcesPostOperation = (apiOperation[Inline_response_200_33]("variableUserSourcesPost")
       summary "Store VariableUserSource"
-      parameters(bodyParam[VariableUserSource]("body").description("").optional)
+      parameters(queryParam[String]("accessToken").description("").optional,
+        bodyParam[VariableUserSource]("body").description("").optional)
   )
 
   post("/variableUserSources",operation(variableUserSourcesPostOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
                 
@@ -147,10 +191,11 @@ bodyParam[VariableUserSource]("body").description("").optional
 
   
 
-  val variableUserSourcesIdGetOperation = (apiOperation[Inline_response_200_26]("variableUserSourcesIdGet")
+  val variableUserSourcesIdGetOperation = (apiOperation[Inline_response_200_33]("variableUserSourcesIdGet")
       summary "Get VariableUserSource"
       parameters(pathParam[Int]("id").description(""),
-        queryParam[Int]("sourceId").description(""))
+        queryParam[Int]("sourceId").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   get("/variableUserSources/{id}",operation(variableUserSourcesIdGetOperation)) {
@@ -173,6 +218,16 @@ bodyParam[VariableUserSource]("body").description("").optional
     
     println("sourceId: " + sourceId)
   
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
   }
 
   
@@ -181,6 +236,7 @@ bodyParam[VariableUserSource]("body").description("").optional
       summary "Update VariableUserSource"
       parameters(pathParam[Int]("id").description(""),
         queryParam[Int]("sourceId").description(""),
+        queryParam[String]("accessToken").description("").optional,
         bodyParam[VariableUserSource]("body").description("").optional)
   )
 
@@ -206,6 +262,16 @@ bodyParam[VariableUserSource]("body").description("").optional
   
     
     
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
+    
+    
                 
 bodyParam[VariableUserSource]("body").description("").optional
     
@@ -218,7 +284,8 @@ bodyParam[VariableUserSource]("body").description("").optional
   val variableUserSourcesIdDeleteOperation = (apiOperation[Inline_response_200_2]("variableUserSourcesIdDelete")
       summary "Delete VariableUserSource"
       parameters(pathParam[Int]("id").description(""),
-        queryParam[Int]("sourceId").description(""))
+        queryParam[Int]("sourceId").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   delete("/variableUserSources/{id}",operation(variableUserSourcesIdDeleteOperation)) {
@@ -240,6 +307,16 @@ bodyParam[VariableUserSource]("body").description("").optional
 
     
     println("sourceId: " + sourceId)
+  
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
   
   }
 

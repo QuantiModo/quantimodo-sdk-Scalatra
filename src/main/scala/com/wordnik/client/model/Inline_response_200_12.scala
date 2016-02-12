@@ -1,9 +1,9 @@
 package com.wordnik.client.model
 
-import com.wordnik.client.model.Measurement
+import com.wordnik.client.model.CommonVariableRelationship
 
 
 case class Inline_response_200_12 (
-  data: Measurement,
+  data: List[CommonVariableRelationship],
   success: Boolean
 )

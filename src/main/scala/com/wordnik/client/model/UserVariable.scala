@@ -5,6 +5,7 @@ import java.util.Date
 
 case class UserVariable (
   parent_id: Int,
+  user_id: Int,
   client_id: String,
   variable_id: Int,
   default_unit_id: Int,
@@ -33,7 +34,7 @@ case class UserVariable (
   last_successful_update_time: Date,
   standard_deviation: Float,
   variance: Float,
-  minimum_recorded_daily_value: Float,
+  minimum_recorded_value: Float,
   maximum_recorded_daily_value: Float,
   mean: Float,
   median: Float,
@@ -46,6 +47,8 @@ case class UserVariable (
   latitude: Float,
   longitude: Float,
   location: String,
+  experiment_start_time: Date,
+  experiment_end_time: Date,
   created_at: Date,
   updated_at: Date,
   outcome: Boolean,

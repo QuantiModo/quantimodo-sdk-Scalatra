@@ -1,7 +1,7 @@
 package com.wordnik.client.api
 
-import com.wordnik.client.model.Inline_response_200_15
-import com.wordnik.client.model.Inline_response_200_16
+import com.wordnik.client.model.Inline_response_200_24
+import com.wordnik.client.model.Inline_response_200_25
 import com.wordnik.client.model.UnitCategory
 import com.wordnik.client.model.Inline_response_200_2
 
@@ -31,9 +31,10 @@ class UnitCategoryApi (implicit val swagger: Swagger) extends ScalatraServlet
   }
   
 
-  val unitCategoriesGetOperation = (apiOperation[Inline_response_200_15]("unitCategoriesGet")
-      summary "Get all UnitCategories"
-      parameters(queryParam[String]("name").description("").optional,
+  val unitCategoriesGetOperation = (apiOperation[Inline_response_200_24]("unitCategoriesGet")
+      summary "Get unit categories"
+      parameters(queryParam[String]("accessToken").description("").optional,
+        queryParam[String]("name").description("").optional,
         queryParam[String]("createdAt").description("").optional,
         queryParam[String]("updatedAt").description("").optional,
         queryParam[Int]("limit").description("").optional,
@@ -43,6 +44,16 @@ class UnitCategoryApi (implicit val swagger: Swagger) extends ScalatraServlet
 
   get("/unitCategories",operation(unitCategoriesGetOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
         
@@ -107,13 +118,24 @@ class UnitCategoryApi (implicit val swagger: Swagger) extends ScalatraServlet
 
   
 
-  val unitCategoriesPostOperation = (apiOperation[Inline_response_200_16]("unitCategoriesPost")
+  val unitCategoriesPostOperation = (apiOperation[Inline_response_200_25]("unitCategoriesPost")
       summary "Store UnitCategory"
-      parameters(bodyParam[UnitCategory]("body").description("").optional)
+      parameters(queryParam[String]("accessToken").description("").optional,
+        bodyParam[UnitCategory]("body").description("").optional)
   )
 
   post("/unitCategories",operation(unitCategoriesPostOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
                 
@@ -125,9 +147,10 @@ bodyParam[UnitCategory]("body").description("").optional
 
   
 
-  val unitCategoriesIdGetOperation = (apiOperation[Inline_response_200_16]("unitCategoriesIdGet")
+  val unitCategoriesIdGetOperation = (apiOperation[Inline_response_200_25]("unitCategoriesIdGet")
       summary "Get UnitCategory"
-      parameters(pathParam[Int]("id").description(""))
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   get("/unitCategories/{id}",operation(unitCategoriesIdGetOperation)) {
@@ -140,6 +163,16 @@ bodyParam[UnitCategory]("body").description("").optional
     
     println("id: " + id)
   
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
   }
 
   
@@ -147,6 +180,7 @@ bodyParam[UnitCategory]("body").description("").optional
   val unitCategoriesIdPutOperation = (apiOperation[Inline_response_200_2]("unitCategoriesIdPut")
       summary "Update UnitCategory"
       parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional,
         bodyParam[UnitCategory]("body").description("").optional)
   )
 
@@ -162,6 +196,16 @@ bodyParam[UnitCategory]("body").description("").optional
   
     
     
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
+    
+    
                 
 bodyParam[UnitCategory]("body").description("").optional
     
@@ -173,7 +217,8 @@ bodyParam[UnitCategory]("body").description("").optional
 
   val unitCategoriesIdDeleteOperation = (apiOperation[Inline_response_200_2]("unitCategoriesIdDelete")
       summary "Delete UnitCategory"
-      parameters(pathParam[Int]("id").description(""))
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   delete("/unitCategories/{id}",operation(unitCategoriesIdDeleteOperation)) {
@@ -185,6 +230,16 @@ bodyParam[UnitCategory]("body").description("").optional
 
     
     println("id: " + id)
+  
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
   
   }
 

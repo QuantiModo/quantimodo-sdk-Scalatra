@@ -1,5 +1,6 @@
 package com.wordnik.client.model
 
+import java.util.Date
 
 
 case class Connector (
@@ -11,5 +12,7 @@ case class Connector (
   short_description: String,
   long_description: String,
   enabled: Boolean,
-  oauth: Boolean
+  oauth: Boolean,
+  created_at: Date,
+  updated_at: Date
 )

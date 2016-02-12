@@ -1,9 +1,9 @@
 package com.wordnik.client.model
 
-import com.wordnik.client.model.Connector
+import com.wordnik.client.model.Measurement
 
 
 case class Inline_response_200_5 (
-  data: List[Connector],
+  data: List[Measurement],
   success: Boolean
 )

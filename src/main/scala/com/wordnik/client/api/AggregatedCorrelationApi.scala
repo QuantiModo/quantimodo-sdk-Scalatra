@@ -34,7 +34,8 @@ class AggregatedCorrelationApi (implicit val swagger: Swagger) extends ScalatraS
 
   val aggregatedCorrelationsGetOperation = (apiOperation[Inline_response_200]("aggregatedCorrelationsGet")
       summary "Get all AggregatedCorrelations"
-      parameters(queryParam[BigDecimal]("correlation").description("").optional,
+      parameters(queryParam[String]("accessToken").description("").optional,
+        queryParam[BigDecimal]("correlation").description("").optional,
         queryParam[Int]("causeId").description("").optional,
         queryParam[Int]("effectId").description("").optional,
         queryParam[Int]("onsetDelay").description("").optional,
@@ -43,7 +44,6 @@ class AggregatedCorrelationApi (implicit val swagger: Swagger) extends ScalatraS
         queryParam[BigDecimal]("valuePredictingHighOutcome").description("").optional,
         queryParam[BigDecimal]("valuePredictingLowOutcome").description("").optional,
         queryParam[BigDecimal]("optimalPearsonProduct").description("").optional,
-        queryParam[BigDecimal]("vote").description("").optional,
         queryParam[Int]("numberOfUsers").description("").optional,
         queryParam[Int]("numberOfCorrelations").description("").optional,
         queryParam[BigDecimal]("statisticalSignificance").description("").optional,
@@ -66,6 +66,16 @@ class AggregatedCorrelationApi (implicit val swagger: Swagger) extends ScalatraS
 
   get("/aggregatedCorrelations",operation(aggregatedCorrelationsGetOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
         
@@ -155,16 +165,6 @@ class AggregatedCorrelationApi (implicit val swagger: Swagger) extends ScalatraS
 
     
     println("optimalPearsonProduct: " + optimalPearsonProduct)
-  
-    
-    
-        
-      
-      val vote = params.getAs[BigDecimal]("vote")
-            
-
-    
-    println("vote: " + vote)
   
     
     
@@ -352,11 +352,22 @@ class AggregatedCorrelationApi (implicit val swagger: Swagger) extends ScalatraS
 
   val aggregatedCorrelationsPostOperation = (apiOperation[Inline_response_200_1]("aggregatedCorrelationsPost")
       summary "Store AggregatedCorrelation"
-      parameters(bodyParam[AggregatedCorrelation]("body").description("").optional)
+      parameters(queryParam[String]("accessToken").description("").optional,
+        bodyParam[AggregatedCorrelation]("body").description("").optional)
   )
 
   post("/aggregatedCorrelations",operation(aggregatedCorrelationsPostOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
                 
@@ -370,7 +381,8 @@ bodyParam[AggregatedCorrelation]("body").description("").optional
 
   val aggregatedCorrelationsIdGetOperation = (apiOperation[Inline_response_200_1]("aggregatedCorrelationsIdGet")
       summary "Get AggregatedCorrelation"
-      parameters(pathParam[Int]("id").description(""))
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   get("/aggregatedCorrelations/{id}",operation(aggregatedCorrelationsIdGetOperation)) {
@@ -383,6 +395,16 @@ bodyParam[AggregatedCorrelation]("body").description("").optional
     
     println("id: " + id)
   
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
   }
 
   
@@ -390,6 +412,7 @@ bodyParam[AggregatedCorrelation]("body").description("").optional
   val aggregatedCorrelationsIdPutOperation = (apiOperation[Inline_response_200_2]("aggregatedCorrelationsIdPut")
       summary "Update AggregatedCorrelation"
       parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional,
         bodyParam[AggregatedCorrelation]("body").description("").optional)
   )
 
@@ -405,6 +428,16 @@ bodyParam[AggregatedCorrelation]("body").description("").optional
   
     
     
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
+    
+    
                 
 bodyParam[AggregatedCorrelation]("body").description("").optional
     
@@ -416,7 +449,8 @@ bodyParam[AggregatedCorrelation]("body").description("").optional
 
   val aggregatedCorrelationsIdDeleteOperation = (apiOperation[Inline_response_200_2]("aggregatedCorrelationsIdDelete")
       summary "Delete AggregatedCorrelation"
-      parameters(pathParam[Int]("id").description(""))
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   delete("/aggregatedCorrelations/{id}",operation(aggregatedCorrelationsIdDeleteOperation)) {
@@ -428,6 +462,16 @@ bodyParam[AggregatedCorrelation]("body").description("").optional
 
     
     println("id: " + id)
+  
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
   
   }
 

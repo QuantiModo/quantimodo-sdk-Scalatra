@@ -1,9 +1,9 @@
 package com.wordnik.client.model
 
-import com.wordnik.client.model.Vote
+import com.wordnik.client.model.UserVariableRelationship
 
 
 case class Inline_response_200_29 (
-  data: List[Vote],
+  data: UserVariableRelationship,
   success: Boolean
 )

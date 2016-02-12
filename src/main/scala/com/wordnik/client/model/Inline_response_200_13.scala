@@ -1,9 +1,9 @@
 package com.wordnik.client.model
 
-import com.wordnik.client.model.Source
+import com.wordnik.client.model.CommonVariableRelationship
 
 
 case class Inline_response_200_13 (
-  data: List[Source],
+  data: CommonVariableRelationship,
   success: Boolean
 )

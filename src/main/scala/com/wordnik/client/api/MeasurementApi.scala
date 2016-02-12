@@ -1,10 +1,10 @@
 package com.wordnik.client.api
 
-import com.wordnik.client.model.Inline_response_200_11
+import com.wordnik.client.model.Inline_response_200_5
 import java.math.BigDecimal
 import com.wordnik.client.model.MeasurementPost
 import java.io.File
-import com.wordnik.client.model.Inline_response_200_12
+import com.wordnik.client.model.Inline_response_200_20
 import com.wordnik.client.model.Measurement
 import com.wordnik.client.model.Inline_response_200_2
 
@@ -34,15 +34,19 @@ class MeasurementApi (implicit val swagger: Swagger) extends ScalatraServlet
   }
   
 
-  val measurementsGetOperation = (apiOperation[Inline_response_200_11]("measurementsGet")
-      summary "Get all Measurements"
-      parameters(queryParam[Int]("userId").description("").optional,
+  val measurementsGetOperation = (apiOperation[Inline_response_200_5]("measurementsGet")
+      summary "Get measurements for this user"
+      parameters(queryParam[String]("accessToken").description("").optional,
+        queryParam[Int]("userId").description("").optional,
         queryParam[String]("clientId").description("").optional,
         queryParam[Int]("connectorId").description("").optional,
         queryParam[Int]("variableId").description("").optional,
-        queryParam[Int]("startTime").description("").optional,
+        queryParam[Int]("sourceId").description("").optional,
+        queryParam[String]("startTime").description("").optional,
         queryParam[BigDecimal]("value").description("").optional,
+        queryParam[Int]("unitId").description("").optional,
         queryParam[BigDecimal]("originalValue").description("").optional,
+        queryParam[Int]("originalUnitId").description("").optional,
         queryParam[Int]("duration").description("").optional,
         queryParam[String]("note").description("").optional,
         queryParam[BigDecimal]("latitude").description("").optional,
@@ -58,6 +62,16 @@ class MeasurementApi (implicit val swagger: Swagger) extends ScalatraServlet
 
   get("/measurements",operation(measurementsGetOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
         
@@ -102,7 +116,17 @@ class MeasurementApi (implicit val swagger: Swagger) extends ScalatraServlet
     
         
       
-      val startTime = params.getAs[Int]("startTime")
+      val sourceId = params.getAs[Int]("sourceId")
+            
+
+    
+    println("sourceId: " + sourceId)
+  
+    
+    
+        
+      
+      val startTime = params.getAs[String]("startTime")
             
 
     
@@ -122,11 +146,31 @@ class MeasurementApi (implicit val swagger: Swagger) extends ScalatraServlet
     
         
       
+      val unitId = params.getAs[Int]("unitId")
+            
+
+    
+    println("unitId: " + unitId)
+  
+    
+    
+        
+      
       val originalValue = params.getAs[BigDecimal]("originalValue")
             
 
     
     println("originalValue: " + originalValue)
+  
+    
+    
+        
+      
+      val originalUnitId = params.getAs[Int]("originalUnitId")
+            
+
+    
+    println("originalUnitId: " + originalUnitId)
   
     
     
@@ -242,13 +286,24 @@ class MeasurementApi (implicit val swagger: Swagger) extends ScalatraServlet
 
   
 
-  val measurementsPostOperation = (apiOperation[Inline_response_200_11]("measurementsPost")
-      summary "Store Measurement"
-      parameters(bodyParam[MeasurementPost]("body").description("").optional)
+  val measurementsPostOperation = (apiOperation[Inline_response_200_5]("measurementsPost")
+      summary "Post a new set or update existing measurements to the database"
+      parameters(queryParam[String]("accessToken").description("").optional,
+        bodyParam[MeasurementPost]("body").description("").optional)
   )
 
   post("/measurements",operation(measurementsPostOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
                 
@@ -262,29 +317,50 @@ bodyParam[MeasurementPost]("body").description("").optional
 
   val measurementsCsvGetOperation = (apiOperation[File]("measurementsCsvGet")
       summary "Get Measurements CSV"
-      parameters()
+      parameters(queryParam[String]("accessToken").description("").optional)
   )
 
   get("/measurements/csv",operation(measurementsCsvGetOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
   }
 
   
 
   val measurementsRequestCsvPostOperation = (apiOperation[Int]("measurementsRequestCsvPost")
       summary "Post Request for Measurements CSV"
-      parameters()
+      parameters(queryParam[String]("accessToken").description("").optional)
   )
 
   post("/measurements/request_csv",operation(measurementsRequestCsvPostOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
   }
 
   
 
-  val measurementsIdGetOperation = (apiOperation[Inline_response_200_12]("measurementsIdGet")
+  val measurementsIdGetOperation = (apiOperation[Inline_response_200_20]("measurementsIdGet")
       summary "Get Measurement"
-      parameters(pathParam[Int]("id").description(""))
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   get("/measurements/{id}",operation(measurementsIdGetOperation)) {
@@ -297,6 +373,16 @@ bodyParam[MeasurementPost]("body").description("").optional
     
     println("id: " + id)
   
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
   }
 
   
@@ -304,6 +390,7 @@ bodyParam[MeasurementPost]("body").description("").optional
   val measurementsIdPutOperation = (apiOperation[Inline_response_200_2]("measurementsIdPut")
       summary "Update Measurement"
       parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional,
         bodyParam[Measurement]("body").description("").optional)
   )
 
@@ -319,6 +406,16 @@ bodyParam[MeasurementPost]("body").description("").optional
   
     
     
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
+    
+    
                 
 bodyParam[Measurement]("body").description("").optional
     
@@ -330,7 +427,8 @@ bodyParam[Measurement]("body").description("").optional
 
   val measurementsIdDeleteOperation = (apiOperation[Inline_response_200_2]("measurementsIdDelete")
       summary "Delete Measurement"
-      parameters(pathParam[Int]("id").description(""))
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   delete("/measurements/{id}",operation(measurementsIdDeleteOperation)) {
@@ -342,6 +440,16 @@ bodyParam[Measurement]("body").description("").optional
 
     
     println("id: " + id)
+  
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
   
   }
 

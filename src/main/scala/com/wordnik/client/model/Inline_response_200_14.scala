@@ -1,9 +1,9 @@
 package com.wordnik.client.model
 
-import com.wordnik.client.model.Source
+import com.wordnik.client.model.Connection
 
 
 case class Inline_response_200_14 (
-  data: Source,
+  data: Connection,
   success: Boolean
 )

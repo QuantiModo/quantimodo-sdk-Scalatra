@@ -1,9 +1,9 @@
 package com.wordnik.client.model
 
-import com.wordnik.client.model.Update
+import com.wordnik.client.model.Measurement
 
 
 case class Inline_response_200_20 (
-  data: Update,
+  data: Measurement,
   success: Boolean
 )

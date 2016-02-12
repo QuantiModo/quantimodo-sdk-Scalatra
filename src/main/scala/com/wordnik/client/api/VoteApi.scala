@@ -1,8 +1,8 @@
 package com.wordnik.client.api
 
-import com.wordnik.client.model.Inline_response_200_29
+import com.wordnik.client.model.Inline_response_200_11
+import com.wordnik.client.model.Inline_response_200_36
 import com.wordnik.client.model.Vote
-import com.wordnik.client.model.Inline_response_200_30
 import com.wordnik.client.model.Inline_response_200_2
 
 import java.io.File
@@ -31,9 +31,10 @@ class VoteApi (implicit val swagger: Swagger) extends ScalatraServlet
   }
   
 
-  val votesGetOperation = (apiOperation[Inline_response_200_29]("votesGet")
+  val votesGetOperation = (apiOperation[Inline_response_200_11]("votesGet")
       summary "Get all Votes"
-      parameters(queryParam[String]("clientId").description("").optional,
+      parameters(queryParam[String]("accessToken").description("").optional,
+        queryParam[String]("clientId").description("").optional,
         queryParam[Int]("userId").description("").optional,
         queryParam[Int]("causeId").description("").optional,
         queryParam[Int]("effectId").description("").optional,
@@ -47,6 +48,16 @@ class VoteApi (implicit val swagger: Swagger) extends ScalatraServlet
 
   get("/votes",operation(votesGetOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
         
@@ -151,13 +162,24 @@ class VoteApi (implicit val swagger: Swagger) extends ScalatraServlet
 
   
 
-  val votesPostOperation = (apiOperation[Inline_response_200_30]("votesPost")
+  val votesPostOperation = (apiOperation[Inline_response_200_36]("votesPost")
       summary "Store Vote"
-      parameters(bodyParam[Vote]("body").description("").optional)
+      parameters(queryParam[String]("accessToken").description("").optional,
+        bodyParam[Vote]("body").description("").optional)
   )
 
   post("/votes",operation(votesPostOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
                 
@@ -169,9 +191,10 @@ bodyParam[Vote]("body").description("").optional
 
   
 
-  val votesIdGetOperation = (apiOperation[Inline_response_200_30]("votesIdGet")
+  val votesIdGetOperation = (apiOperation[Inline_response_200_36]("votesIdGet")
       summary "Get Vote"
-      parameters(pathParam[Int]("id").description(""))
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   get("/votes/{id}",operation(votesIdGetOperation)) {
@@ -184,6 +207,16 @@ bodyParam[Vote]("body").description("").optional
     
     println("id: " + id)
   
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
   }
 
   
@@ -191,6 +224,7 @@ bodyParam[Vote]("body").description("").optional
   val votesIdPutOperation = (apiOperation[Inline_response_200_2]("votesIdPut")
       summary "Update Vote"
       parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional,
         bodyParam[Vote]("body").description("").optional)
   )
 
@@ -206,6 +240,16 @@ bodyParam[Vote]("body").description("").optional
   
     
     
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
+    
+    
                 
 bodyParam[Vote]("body").description("").optional
     
@@ -217,7 +261,8 @@ bodyParam[Vote]("body").description("").optional
 
   val votesIdDeleteOperation = (apiOperation[Inline_response_200_2]("votesIdDelete")
       summary "Delete Vote"
-      parameters(pathParam[Int]("id").description(""))
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   delete("/votes/{id}",operation(votesIdDeleteOperation)) {
@@ -229,6 +274,16 @@ bodyParam[Vote]("body").description("").optional
 
     
     println("id: " + id)
+  
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
   
   }
 

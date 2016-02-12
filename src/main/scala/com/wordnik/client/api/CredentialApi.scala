@@ -1,8 +1,8 @@
 package com.wordnik.client.api
 
-import com.wordnik.client.model.Inline_response_200_9
+import com.wordnik.client.model.Inline_response_200_4
+import com.wordnik.client.model.Inline_response_200_19
 import com.wordnik.client.model.Credential
-import com.wordnik.client.model.Inline_response_200_10
 import com.wordnik.client.model.Inline_response_200_2
 
 import java.io.File
@@ -31,9 +31,11 @@ class CredentialApi (implicit val swagger: Swagger) extends ScalatraServlet
   }
   
 
-  val credentialsGetOperation = (apiOperation[Inline_response_200_9]("credentialsGet")
+  val credentialsGetOperation = (apiOperation[Inline_response_200_4]("credentialsGet")
       summary "Get all Credentials"
-      parameters(queryParam[Boolean]("connectorId").description("").optional,
+      parameters(queryParam[String]("accessToken").description("").optional,
+        queryParam[Int]("userId").description("").optional,
+        queryParam[Int]("connectorId").description("").optional,
         queryParam[String]("attrKey").description("").optional,
         queryParam[String]("attrValue").description("").optional,
         queryParam[String]("createdAt").description("").optional,
@@ -49,7 +51,27 @@ class CredentialApi (implicit val swagger: Swagger) extends ScalatraServlet
     
         
       
-      val connectorId = params.getAs[Boolean]("connectorId")
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
+    
+    
+        
+      
+      val userId = params.getAs[Int]("userId")
+            
+
+    
+    println("userId: " + userId)
+  
+    
+    
+        
+      
+      val connectorId = params.getAs[Int]("connectorId")
             
 
     
@@ -129,13 +151,24 @@ class CredentialApi (implicit val swagger: Swagger) extends ScalatraServlet
 
   
 
-  val credentialsPostOperation = (apiOperation[Inline_response_200_10]("credentialsPost")
+  val credentialsPostOperation = (apiOperation[Inline_response_200_19]("credentialsPost")
       summary "Store Credential"
-      parameters(bodyParam[Credential]("body").description("").optional)
+      parameters(queryParam[String]("accessToken").description("").optional,
+        bodyParam[Credential]("body").description("").optional)
   )
 
   post("/credentials",operation(credentialsPostOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
                 
@@ -147,10 +180,11 @@ bodyParam[Credential]("body").description("").optional
 
   
 
-  val credentialsIdGetOperation = (apiOperation[Inline_response_200_10]("credentialsIdGet")
+  val credentialsIdGetOperation = (apiOperation[Inline_response_200_19]("credentialsIdGet")
       summary "Get Credential"
       parameters(pathParam[Int]("id").description(""),
-        queryParam[String]("attrKey").description(""))
+        queryParam[String]("attrKey").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   get("/credentials/{id}",operation(credentialsIdGetOperation)) {
@@ -173,6 +207,16 @@ bodyParam[Credential]("body").description("").optional
     
     println("attrKey: " + attrKey)
   
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
   }
 
   
@@ -181,6 +225,7 @@ bodyParam[Credential]("body").description("").optional
       summary "Update Credential"
       parameters(pathParam[Int]("id").description(""),
         queryParam[String]("attrKey").description(""),
+        queryParam[String]("accessToken").description("").optional,
         bodyParam[Credential]("body").description("").optional)
   )
 
@@ -206,6 +251,16 @@ bodyParam[Credential]("body").description("").optional
   
     
     
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
+    
+    
                 
 bodyParam[Credential]("body").description("").optional
     
@@ -218,7 +273,8 @@ bodyParam[Credential]("body").description("").optional
   val credentialsIdDeleteOperation = (apiOperation[Inline_response_200_2]("credentialsIdDelete")
       summary "Delete Credential"
       parameters(pathParam[Int]("id").description(""),
-        queryParam[String]("attrKey").description(""))
+        queryParam[String]("attrKey").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   delete("/credentials/{id}",operation(credentialsIdDeleteOperation)) {
@@ -240,6 +296,16 @@ bodyParam[Credential]("body").description("").optional
 
     
     println("attrKey: " + attrKey)
+  
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
   
   }
 

@@ -1,9 +1,9 @@
 package com.wordnik.client.model
 
-import com.wordnik.client.model.VariableUserSource
+import com.wordnik.client.model.Unit
 
 
 case class Inline_response_200_26 (
-  data: VariableUserSource,
+  data: List[Unit],
   success: Boolean
 )

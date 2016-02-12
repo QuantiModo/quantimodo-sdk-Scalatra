@@ -1,7 +1,7 @@
 package com.wordnik.client.api
 
 import com.wordnik.client.model.Inline_response_200_3
-import com.wordnik.client.model.Inline_response_200_4
+import com.wordnik.client.model.Inline_response_200_14
 import com.wordnik.client.model.Connection
 import com.wordnik.client.model.Inline_response_200_2
 
@@ -33,7 +33,8 @@ class ConnectionApi (implicit val swagger: Swagger) extends ScalatraServlet
 
   val connectionsGetOperation = (apiOperation[Inline_response_200_3]("connectionsGet")
       summary "Get all Connections"
-      parameters(queryParam[Int]("userId").description("").optional,
+      parameters(queryParam[String]("accessToken").description("").optional,
+        queryParam[Int]("userId").description("").optional,
         queryParam[Int]("connectorId").description("").optional,
         queryParam[String]("connectStatus").description("").optional,
         queryParam[String]("connectError").description("").optional,
@@ -50,6 +51,16 @@ class ConnectionApi (implicit val swagger: Swagger) extends ScalatraServlet
 
   get("/connections",operation(connectionsGetOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
         
@@ -184,13 +195,24 @@ class ConnectionApi (implicit val swagger: Swagger) extends ScalatraServlet
 
   
 
-  val connectionsPostOperation = (apiOperation[Inline_response_200_4]("connectionsPost")
+  val connectionsPostOperation = (apiOperation[Inline_response_200_14]("connectionsPost")
       summary "Store Connection"
-      parameters(bodyParam[Connection]("body").description("").optional)
+      parameters(queryParam[String]("accessToken").description("").optional,
+        bodyParam[Connection]("body").description("").optional)
   )
 
   post("/connections",operation(connectionsPostOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
                 
@@ -202,9 +224,10 @@ bodyParam[Connection]("body").description("").optional
 
   
 
-  val connectionsIdGetOperation = (apiOperation[Inline_response_200_4]("connectionsIdGet")
+  val connectionsIdGetOperation = (apiOperation[Inline_response_200_14]("connectionsIdGet")
       summary "Get Connection"
-      parameters(pathParam[Int]("id").description(""))
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   get("/connections/{id}",operation(connectionsIdGetOperation)) {
@@ -217,6 +240,16 @@ bodyParam[Connection]("body").description("").optional
     
     println("id: " + id)
   
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
   }
 
   
@@ -224,6 +257,7 @@ bodyParam[Connection]("body").description("").optional
   val connectionsIdPutOperation = (apiOperation[Inline_response_200_2]("connectionsIdPut")
       summary "Update Connection"
       parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional,
         bodyParam[Connection]("body").description("").optional)
   )
 
@@ -239,6 +273,16 @@ bodyParam[Connection]("body").description("").optional
   
     
     
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
+    
+    
                 
 bodyParam[Connection]("body").description("").optional
     
@@ -250,7 +294,8 @@ bodyParam[Connection]("body").description("").optional
 
   val connectionsIdDeleteOperation = (apiOperation[Inline_response_200_2]("connectionsIdDelete")
       summary "Delete Connection"
-      parameters(pathParam[Int]("id").description(""))
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   delete("/connections/{id}",operation(connectionsIdDeleteOperation)) {
@@ -262,6 +307,16 @@ bodyParam[Connection]("body").description("").optional
 
     
     println("id: " + id)
+  
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
   
   }
 

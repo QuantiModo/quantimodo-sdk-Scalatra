@@ -29,5 +29,6 @@ case class AggregatedCorrelation (
   error_message: String,
   last_successful_update_time: Date,
   reverse_pearson_correlation_coefficient: Float,
-  predictive_pearson_correlation_coefficient: Float
+  predictive_pearson_correlation_coefficient: Float,
+  data_source: String
 )

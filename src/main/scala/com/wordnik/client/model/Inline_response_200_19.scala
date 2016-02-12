@@ -1,9 +1,9 @@
 package com.wordnik.client.model
 
-import com.wordnik.client.model.Update
+import com.wordnik.client.model.Credential
 
 
 case class Inline_response_200_19 (
-  data: List[Update],
+  data: Credential,
   success: Boolean
 )

@@ -1,9 +1,9 @@
 package com.wordnik.client.api
 
-import com.wordnik.client.model.Inline_response_200_27
 import java.math.BigDecimal
+import com.wordnik.client.model.Inline_response_200_34
 import com.wordnik.client.model.Variable
-import com.wordnik.client.model.Inline_response_200_28
+import com.wordnik.client.model.Inline_response_200_35
 import com.wordnik.client.model.Inline_response_200_2
 
 import java.io.File
@@ -32,9 +32,10 @@ class VariableApi (implicit val swagger: Swagger) extends ScalatraServlet
   }
   
 
-  val variablesGetOperation = (apiOperation[Inline_response_200_27]("variablesGet")
+  val variablesGetOperation = (apiOperation[Inline_response_200_34]("variablesGet")
       summary "Get all Variables"
-      parameters(queryParam[Int]("id").description("").optional,
+      parameters(queryParam[String]("accessToken").description("").optional,
+        queryParam[Int]("id").description("").optional,
         queryParam[String]("clientId").description("").optional,
         queryParam[Int]("parentId").description("").optional,
         queryParam[String]("name").description("").optional,
@@ -58,9 +59,6 @@ class VariableApi (implicit val swagger: Swagger) extends ScalatraServlet
         queryParam[BigDecimal]("numberOfUniqueValues").description("").optional,
         queryParam[BigDecimal]("skewness").description("").optional,
         queryParam[BigDecimal]("kurtosis").description("").optional,
-        queryParam[BigDecimal]("latitude").description("").optional,
-        queryParam[BigDecimal]("longitude").description("").optional,
-        queryParam[String]("location").description("").optional,
         queryParam[String]("status").description("").optional,
         queryParam[String]("errorMessage").description("").optional,
         queryParam[String]("lastSuccessfulUpdateTime").description("").optional,
@@ -80,6 +78,16 @@ class VariableApi (implicit val swagger: Swagger) extends ScalatraServlet
 
   get("/variables",operation(variablesGetOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
         
@@ -324,36 +332,6 @@ class VariableApi (implicit val swagger: Swagger) extends ScalatraServlet
     
         
       
-      val latitude = params.getAs[BigDecimal]("latitude")
-            
-
-    
-    println("latitude: " + latitude)
-  
-    
-    
-        
-      
-      val longitude = params.getAs[BigDecimal]("longitude")
-            
-
-    
-    println("longitude: " + longitude)
-  
-    
-    
-        
-      
-      val location = params.getAs[String]("location")
-            
-
-    
-    println("location: " + location)
-  
-    
-    
-        
-      
       val status = params.getAs[String]("status")
             
 
@@ -504,13 +482,24 @@ class VariableApi (implicit val swagger: Swagger) extends ScalatraServlet
 
   
 
-  val variablesPostOperation = (apiOperation[Inline_response_200_28]("variablesPost")
+  val variablesPostOperation = (apiOperation[Inline_response_200_35]("variablesPost")
       summary "Store Variable"
-      parameters(bodyParam[Variable]("body").description("").optional)
+      parameters(queryParam[String]("accessToken").description("").optional,
+        bodyParam[Variable]("body").description("").optional)
   )
 
   post("/variables",operation(variablesPostOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
                 
@@ -522,9 +511,10 @@ bodyParam[Variable]("body").description("").optional
 
   
 
-  val variablesIdGetOperation = (apiOperation[Inline_response_200_28]("variablesIdGet")
+  val variablesIdGetOperation = (apiOperation[Inline_response_200_35]("variablesIdGet")
       summary "Get Variable"
-      parameters(pathParam[Int]("id").description(""))
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   get("/variables/{id}",operation(variablesIdGetOperation)) {
@@ -537,6 +527,16 @@ bodyParam[Variable]("body").description("").optional
     
     println("id: " + id)
   
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
   }
 
   
@@ -544,6 +544,7 @@ bodyParam[Variable]("body").description("").optional
   val variablesIdPutOperation = (apiOperation[Inline_response_200_2]("variablesIdPut")
       summary "Update Variable"
       parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional,
         bodyParam[Variable]("body").description("").optional)
   )
 
@@ -559,6 +560,16 @@ bodyParam[Variable]("body").description("").optional
   
     
     
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
+    
+    
                 
 bodyParam[Variable]("body").description("").optional
     
@@ -570,7 +581,8 @@ bodyParam[Variable]("body").description("").optional
 
   val variablesIdDeleteOperation = (apiOperation[Inline_response_200_2]("variablesIdDelete")
       summary "Delete Variable"
-      parameters(pathParam[Int]("id").description(""))
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   delete("/variables/{id}",operation(variablesIdDeleteOperation)) {
@@ -582,6 +594,16 @@ bodyParam[Variable]("body").description("").optional
 
     
     println("id: " + id)
+  
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
   
   }
 

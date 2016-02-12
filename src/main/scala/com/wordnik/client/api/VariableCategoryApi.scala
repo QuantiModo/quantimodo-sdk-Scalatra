@@ -1,9 +1,9 @@
 package com.wordnik.client.api
 
+import com.wordnik.client.model.Inline_response_200_31
 import java.math.BigDecimal
-import com.wordnik.client.model.Inline_response_200_23
 import com.wordnik.client.model.VariableCategory
-import com.wordnik.client.model.Inline_response_200_24
+import com.wordnik.client.model.Inline_response_200_32
 import com.wordnik.client.model.Inline_response_200_2
 
 import java.io.File
@@ -32,9 +32,10 @@ class VariableCategoryApi (implicit val swagger: Swagger) extends ScalatraServle
   }
   
 
-  val variableCategoriesGetOperation = (apiOperation[Inline_response_200_23]("variableCategoriesGet")
+  val variableCategoriesGetOperation = (apiOperation[Inline_response_200_31]("variableCategoriesGet")
       summary "Get all VariableCategories"
-      parameters(queryParam[String]("name").description("").optional,
+      parameters(queryParam[String]("accessToken").description("").optional,
+        queryParam[String]("name").description("").optional,
         queryParam[BigDecimal]("fillingValue").description("").optional,
         queryParam[BigDecimal]("maximumAllowedValue").description("").optional,
         queryParam[BigDecimal]("minimumAllowedValue").description("").optional,
@@ -56,6 +57,16 @@ class VariableCategoryApi (implicit val swagger: Swagger) extends ScalatraServle
 
   get("/variableCategories",operation(variableCategoriesGetOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
         
@@ -240,13 +251,24 @@ class VariableCategoryApi (implicit val swagger: Swagger) extends ScalatraServle
 
   
 
-  val variableCategoriesPostOperation = (apiOperation[Inline_response_200_24]("variableCategoriesPost")
+  val variableCategoriesPostOperation = (apiOperation[Inline_response_200_32]("variableCategoriesPost")
       summary "Store VariableCategory"
-      parameters(bodyParam[VariableCategory]("body").description("").optional)
+      parameters(queryParam[String]("accessToken").description("").optional,
+        bodyParam[VariableCategory]("body").description("").optional)
   )
 
   post("/variableCategories",operation(variableCategoriesPostOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
                 
@@ -258,9 +280,10 @@ bodyParam[VariableCategory]("body").description("").optional
 
   
 
-  val variableCategoriesIdGetOperation = (apiOperation[Inline_response_200_24]("variableCategoriesIdGet")
+  val variableCategoriesIdGetOperation = (apiOperation[Inline_response_200_32]("variableCategoriesIdGet")
       summary "Get VariableCategory"
-      parameters(pathParam[Int]("id").description(""))
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   get("/variableCategories/{id}",operation(variableCategoriesIdGetOperation)) {
@@ -273,6 +296,16 @@ bodyParam[VariableCategory]("body").description("").optional
     
     println("id: " + id)
   
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
   }
 
   
@@ -280,6 +313,7 @@ bodyParam[VariableCategory]("body").description("").optional
   val variableCategoriesIdPutOperation = (apiOperation[Inline_response_200_2]("variableCategoriesIdPut")
       summary "Update VariableCategory"
       parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional,
         bodyParam[VariableCategory]("body").description("").optional)
   )
 
@@ -295,6 +329,16 @@ bodyParam[VariableCategory]("body").description("").optional
   
     
     
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
+    
+    
                 
 bodyParam[VariableCategory]("body").description("").optional
     
@@ -306,7 +350,8 @@ bodyParam[VariableCategory]("body").description("").optional
 
   val variableCategoriesIdDeleteOperation = (apiOperation[Inline_response_200_2]("variableCategoriesIdDelete")
       summary "Delete VariableCategory"
-      parameters(pathParam[Int]("id").description(""))
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   delete("/variableCategories/{id}",operation(variableCategoriesIdDeleteOperation)) {
@@ -318,6 +363,16 @@ bodyParam[VariableCategory]("body").description("").optional
 
     
     println("id: " + id)
+  
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
   
   }
 

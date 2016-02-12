@@ -1,8 +1,8 @@
 package com.wordnik.client.api
 
-import com.wordnik.client.model.Inline_response_200_13
+import com.wordnik.client.model.Inline_response_200_21
 import com.wordnik.client.model.Source
-import com.wordnik.client.model.Inline_response_200_14
+import com.wordnik.client.model.Inline_response_200_22
 import com.wordnik.client.model.Inline_response_200_2
 
 import java.io.File
@@ -31,9 +31,10 @@ class SourceApi (implicit val swagger: Swagger) extends ScalatraServlet
   }
   
 
-  val sourcesGetOperation = (apiOperation[Inline_response_200_13]("sourcesGet")
-      summary "Get all Sources"
-      parameters(queryParam[String]("clientId").description("").optional,
+  val sourcesGetOperation = (apiOperation[Inline_response_200_21]("sourcesGet")
+      summary "Get measurement sources"
+      parameters(queryParam[String]("accessToken").description("").optional,
+        queryParam[String]("clientId").description("").optional,
         queryParam[String]("name").description("").optional,
         queryParam[String]("createdAt").description("").optional,
         queryParam[String]("updatedAt").description("").optional,
@@ -44,6 +45,16 @@ class SourceApi (implicit val swagger: Swagger) extends ScalatraServlet
 
   get("/sources",operation(sourcesGetOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
         
@@ -118,13 +129,24 @@ class SourceApi (implicit val swagger: Swagger) extends ScalatraServlet
 
   
 
-  val sourcesPostOperation = (apiOperation[Inline_response_200_14]("sourcesPost")
-      summary "Store Source"
-      parameters(bodyParam[Source]("body").description("").optional)
+  val sourcesPostOperation = (apiOperation[Inline_response_200_22]("sourcesPost")
+      summary "Add a data source"
+      parameters(queryParam[String]("accessToken").description("").optional,
+        bodyParam[Source]("body").description("").optional)
   )
 
   post("/sources",operation(sourcesPostOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
                 
@@ -136,9 +158,10 @@ bodyParam[Source]("body").description("").optional
 
   
 
-  val sourcesIdGetOperation = (apiOperation[Inline_response_200_14]("sourcesIdGet")
+  val sourcesIdGetOperation = (apiOperation[Inline_response_200_22]("sourcesIdGet")
       summary "Get Source"
-      parameters(pathParam[Int]("id").description(""))
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   get("/sources/{id}",operation(sourcesIdGetOperation)) {
@@ -151,6 +174,16 @@ bodyParam[Source]("body").description("").optional
     
     println("id: " + id)
   
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
   }
 
   
@@ -158,6 +191,7 @@ bodyParam[Source]("body").description("").optional
   val sourcesIdPutOperation = (apiOperation[Inline_response_200_2]("sourcesIdPut")
       summary "Update Source"
       parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional,
         bodyParam[Source]("body").description("").optional)
   )
 
@@ -173,6 +207,16 @@ bodyParam[Source]("body").description("").optional
   
     
     
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
+    
+    
                 
 bodyParam[Source]("body").description("").optional
     
@@ -184,7 +228,8 @@ bodyParam[Source]("body").description("").optional
 
   val sourcesIdDeleteOperation = (apiOperation[Inline_response_200_2]("sourcesIdDelete")
       summary "Delete Source"
-      parameters(pathParam[Int]("id").description(""))
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   delete("/sources/{id}",operation(sourcesIdDeleteOperation)) {
@@ -196,6 +241,16 @@ bodyParam[Source]("body").description("").optional
 
     
     println("id: " + id)
+  
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
   
   }
 

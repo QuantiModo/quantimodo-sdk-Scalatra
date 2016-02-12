@@ -3,6 +3,7 @@ package com.wordnik.client.model
 
 
 case class MeasurementValue (
-  start_time: Long,
-  value: Float
+  start_time: String,
+  value: Float,
+  note: String
 )

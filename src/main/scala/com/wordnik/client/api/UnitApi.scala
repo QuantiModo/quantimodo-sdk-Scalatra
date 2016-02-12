@@ -1,8 +1,8 @@
 package com.wordnik.client.api
 
-import com.wordnik.client.model.Inline_response_200_17
+import com.wordnik.client.model.Inline_response_200_26
 import java.math.BigDecimal
-import com.wordnik.client.model.Inline_response_200_18
+import com.wordnik.client.model.Inline_response_200_27
 import com.wordnik.client.model.Unit
 import com.wordnik.client.model.Inline_response_200_2
 
@@ -32,15 +32,17 @@ class UnitApi (implicit val swagger: Swagger) extends ScalatraServlet
   }
   
 
-  val unitsGetOperation = (apiOperation[Inline_response_200_17]("unitsGet")
-      summary "Get all Units"
-      parameters(queryParam[String]("clientId").description("").optional,
+  val unitsGetOperation = (apiOperation[Inline_response_200_26]("unitsGet")
+      summary "Get all available units"
+      parameters(queryParam[String]("accessToken").description("").optional,
+        queryParam[String]("clientId").description("").optional,
         queryParam[String]("name").description("").optional,
         queryParam[String]("abbreviatedName").description("").optional,
-        queryParam[Boolean]("categoryId").description("").optional,
+        queryParam[Int]("categoryId").description("").optional,
         queryParam[BigDecimal]("minimumValue").description("").optional,
         queryParam[BigDecimal]("maximumValue").description("").optional,
         queryParam[Int]("updated").description("").optional,
+        queryParam[Int]("defaultUnitId").description("").optional,
         queryParam[BigDecimal]("multiply").description("").optional,
         queryParam[BigDecimal]("add").description("").optional,
         queryParam[String]("createdAt").description("").optional,
@@ -52,6 +54,16 @@ class UnitApi (implicit val swagger: Swagger) extends ScalatraServlet
 
   get("/units",operation(unitsGetOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
         
@@ -86,7 +98,7 @@ class UnitApi (implicit val swagger: Swagger) extends ScalatraServlet
     
         
       
-      val categoryId = params.getAs[Boolean]("categoryId")
+      val categoryId = params.getAs[Int]("categoryId")
             
 
     
@@ -121,6 +133,16 @@ class UnitApi (implicit val swagger: Swagger) extends ScalatraServlet
 
     
     println("updated: " + updated)
+  
+    
+    
+        
+      
+      val defaultUnitId = params.getAs[Int]("defaultUnitId")
+            
+
+    
+    println("defaultUnitId: " + defaultUnitId)
   
     
     
@@ -196,13 +218,24 @@ class UnitApi (implicit val swagger: Swagger) extends ScalatraServlet
 
   
 
-  val unitsPostOperation = (apiOperation[Inline_response_200_18]("unitsPost")
+  val unitsPostOperation = (apiOperation[Inline_response_200_27]("unitsPost")
       summary "Store Unit"
-      parameters(bodyParam[Unit]("body").description("").optional)
+      parameters(queryParam[String]("accessToken").description("").optional,
+        bodyParam[Unit]("body").description("").optional)
   )
 
   post("/units",operation(unitsPostOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
                 
@@ -214,9 +247,10 @@ bodyParam[Unit]("body").description("").optional
 
   
 
-  val unitsIdGetOperation = (apiOperation[Inline_response_200_18]("unitsIdGet")
+  val unitsIdGetOperation = (apiOperation[Inline_response_200_27]("unitsIdGet")
       summary "Get Unit"
-      parameters(pathParam[Int]("id").description(""))
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   get("/units/{id}",operation(unitsIdGetOperation)) {
@@ -229,6 +263,16 @@ bodyParam[Unit]("body").description("").optional
     
     println("id: " + id)
   
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
   }
 
   
@@ -236,6 +280,7 @@ bodyParam[Unit]("body").description("").optional
   val unitsIdPutOperation = (apiOperation[Inline_response_200_2]("unitsIdPut")
       summary "Update Unit"
       parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional,
         bodyParam[Unit]("body").description("").optional)
   )
 
@@ -251,6 +296,16 @@ bodyParam[Unit]("body").description("").optional
   
     
     
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
+    
+    
                 
 bodyParam[Unit]("body").description("").optional
     
@@ -262,7 +317,8 @@ bodyParam[Unit]("body").description("").optional
 
   val unitsIdDeleteOperation = (apiOperation[Inline_response_200_2]("unitsIdDelete")
       summary "Delete Unit"
-      parameters(pathParam[Int]("id").description(""))
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   delete("/units/{id}",operation(unitsIdDeleteOperation)) {
@@ -274,6 +330,16 @@ bodyParam[Unit]("body").description("").optional
 
     
     println("id: " + id)
+  
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
   
   }
 

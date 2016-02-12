@@ -1,8 +1,8 @@
 package com.wordnik.client.api
 
-import com.wordnik.client.model.Inline_response_200_5
+import com.wordnik.client.model.Inline_response_200_15
+import com.wordnik.client.model.Inline_response_200_16
 import com.wordnik.client.model.Connector
-import com.wordnik.client.model.Inline_response_200_6
 import com.wordnik.client.model.Inline_response_200_2
 
 import java.io.File
@@ -31,9 +31,10 @@ class ConnectorApi (implicit val swagger: Swagger) extends ScalatraServlet
   }
   
 
-  val connectorsGetOperation = (apiOperation[Inline_response_200_5]("connectorsGet")
-      summary "Get all Connectors"
-      parameters(queryParam[String]("name").description("").optional,
+  val connectorsGetOperation = (apiOperation[Inline_response_200_15]("connectorsGet")
+      summary "Get list of Connectors"
+      parameters(queryParam[String]("accessToken").description("").optional,
+        queryParam[String]("name").description("").optional,
         queryParam[String]("displayName").description("").optional,
         queryParam[String]("image").description("").optional,
         queryParam[String]("getItUrl").description("").optional,
@@ -48,6 +49,16 @@ class ConnectorApi (implicit val swagger: Swagger) extends ScalatraServlet
 
   get("/connectors",operation(connectorsGetOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
         
@@ -162,13 +173,24 @@ class ConnectorApi (implicit val swagger: Swagger) extends ScalatraServlet
 
   
 
-  val connectorsPostOperation = (apiOperation[Inline_response_200_6]("connectorsPost")
+  val connectorsPostOperation = (apiOperation[Inline_response_200_16]("connectorsPost")
       summary "Store Connector"
-      parameters(bodyParam[Connector]("body").description("").optional)
+      parameters(queryParam[String]("accessToken").description("").optional,
+        bodyParam[Connector]("body").description("").optional)
   )
 
   post("/connectors",operation(connectorsPostOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
                 
@@ -180,9 +202,10 @@ bodyParam[Connector]("body").description("").optional
 
   
 
-  val connectorsIdGetOperation = (apiOperation[Inline_response_200_6]("connectorsIdGet")
-      summary "Get Connector"
-      parameters(pathParam[Int]("id").description(""))
+  val connectorsIdGetOperation = (apiOperation[Inline_response_200_16]("connectorsIdGet")
+      summary "Get connector info for user"
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   get("/connectors/{id}",operation(connectorsIdGetOperation)) {
@@ -195,6 +218,16 @@ bodyParam[Connector]("body").description("").optional
     
     println("id: " + id)
   
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
   }
 
   
@@ -202,6 +235,7 @@ bodyParam[Connector]("body").description("").optional
   val connectorsIdPutOperation = (apiOperation[Inline_response_200_2]("connectorsIdPut")
       summary "Update Connector"
       parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional,
         bodyParam[Connector]("body").description("").optional)
   )
 
@@ -217,6 +251,16 @@ bodyParam[Connector]("body").description("").optional
   
     
     
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
+    
+    
                 
 bodyParam[Connector]("body").description("").optional
     
@@ -228,7 +272,8 @@ bodyParam[Connector]("body").description("").optional
 
   val connectorsIdDeleteOperation = (apiOperation[Inline_response_200_2]("connectorsIdDelete")
       summary "Delete Connector"
-      parameters(pathParam[Int]("id").description(""))
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   delete("/connectors/{id}",operation(connectorsIdDeleteOperation)) {
@@ -240,6 +285,16 @@ bodyParam[Connector]("body").description("").optional
 
     
     println("id: " + id)
+  
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
   
   }
 

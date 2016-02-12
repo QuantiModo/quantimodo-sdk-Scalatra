@@ -1,9 +1,9 @@
 package com.wordnik.client.model
 
-import com.wordnik.client.model.Variable
+import com.wordnik.client.model.Update
 
 
 case class Inline_response_200_28 (
-  data: Variable,
+  data: Update,
   success: Boolean
 )

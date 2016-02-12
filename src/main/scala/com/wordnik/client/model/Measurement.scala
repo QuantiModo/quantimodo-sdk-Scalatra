@@ -10,7 +10,7 @@ case class Measurement (
   connector_id: Int,
   variable_id: Int,
   source_id: Int,
-  start_time: Int,
+  start_time: String,
   value: Float,
   unit_id: Int,
   original_value: Float,

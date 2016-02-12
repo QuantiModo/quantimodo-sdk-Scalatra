@@ -1,8 +1,8 @@
 package com.wordnik.client.api
 
-import com.wordnik.client.model.Inline_response_200_21
 import java.math.BigDecimal
-import com.wordnik.client.model.Inline_response_200_22
+import com.wordnik.client.model.Inline_response_200_9
+import com.wordnik.client.model.Inline_response_200_30
 import com.wordnik.client.model.UserVariable
 import com.wordnik.client.model.Inline_response_200_2
 
@@ -32,10 +32,13 @@ class UserVariableApi (implicit val swagger: Swagger) extends ScalatraServlet
   }
   
 
-  val userVariablesGetOperation = (apiOperation[Inline_response_200_21]("userVariablesGet")
+  val userVariablesGetOperation = (apiOperation[Inline_response_200_9]("userVariablesGet")
       summary "Get all UserVariables"
-      parameters(queryParam[String]("clientId").description("").optional,
+      parameters(queryParam[String]("accessToken").description("").optional,
+        queryParam[String]("clientId").description("").optional,
+        queryParam[Int]("parentId").description("").optional,
         queryParam[Int]("variableId").description("").optional,
+        queryParam[Int]("userId").description("").optional,
         queryParam[Int]("defaultUnitId").description("").optional,
         queryParam[BigDecimal]("minimumAllowedValue").description("").optional,
         queryParam[BigDecimal]("maximumAllowedValue").description("").optional,
@@ -55,6 +58,7 @@ class UserVariableApi (implicit val swagger: Swagger) extends ScalatraServlet
         queryParam[Int]("lastOriginalUnitId").description("").optional,
         queryParam[Int]("lastOriginalValue").description("").optional,
         queryParam[BigDecimal]("lastValue").description("").optional,
+        queryParam[BigDecimal]("lastOriginalValue2").description("").optional,
         queryParam[Int]("lastSourceId").description("").optional,
         queryParam[Int]("numberOfCorrelations").description("").optional,
         queryParam[String]("status").description("").optional,
@@ -62,8 +66,8 @@ class UserVariableApi (implicit val swagger: Swagger) extends ScalatraServlet
         queryParam[String]("lastSuccessfulUpdateTime").description("").optional,
         queryParam[BigDecimal]("standardDeviation").description("").optional,
         queryParam[BigDecimal]("variance").description("").optional,
-        queryParam[BigDecimal]("minimumRecordedDailyValue").description("").optional,
-        queryParam[BigDecimal]("maximumRecordedDailyValue").description("").optional,
+        queryParam[BigDecimal]("minimumRecordedValue").description("").optional,
+        queryParam[BigDecimal]("maximumRecordedValue").description("").optional,
         queryParam[BigDecimal]("mean").description("").optional,
         queryParam[BigDecimal]("median").description("").optional,
         queryParam[Int]("mostCommonUnitId").description("").optional,
@@ -96,6 +100,16 @@ class UserVariableApi (implicit val swagger: Swagger) extends ScalatraServlet
     
         
       
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
+    
+    
+        
+      
       val clientId = params.getAs[String]("clientId")
             
 
@@ -106,11 +120,31 @@ class UserVariableApi (implicit val swagger: Swagger) extends ScalatraServlet
     
         
       
+      val parentId = params.getAs[Int]("parentId")
+            
+
+    
+    println("parentId: " + parentId)
+  
+    
+    
+        
+      
       val variableId = params.getAs[Int]("variableId")
             
 
     
     println("variableId: " + variableId)
+  
+    
+    
+        
+      
+      val userId = params.getAs[Int]("userId")
+            
+
+    
+    println("userId: " + userId)
   
     
     
@@ -306,6 +340,16 @@ class UserVariableApi (implicit val swagger: Swagger) extends ScalatraServlet
     
         
       
+      val lastOriginalValue2 = params.getAs[BigDecimal]("lastOriginalValue2")
+            
+
+    
+    println("lastOriginalValue2: " + lastOriginalValue2)
+  
+    
+    
+        
+      
       val lastSourceId = params.getAs[Int]("lastSourceId")
             
 
@@ -376,21 +420,21 @@ class UserVariableApi (implicit val swagger: Swagger) extends ScalatraServlet
     
         
       
-      val minimumRecordedDailyValue = params.getAs[BigDecimal]("minimumRecordedDailyValue")
+      val minimumRecordedValue = params.getAs[BigDecimal]("minimumRecordedValue")
             
 
     
-    println("minimumRecordedDailyValue: " + minimumRecordedDailyValue)
+    println("minimumRecordedValue: " + minimumRecordedValue)
   
     
     
         
       
-      val maximumRecordedDailyValue = params.getAs[BigDecimal]("maximumRecordedDailyValue")
+      val maximumRecordedValue = params.getAs[BigDecimal]("maximumRecordedValue")
             
 
     
-    println("maximumRecordedDailyValue: " + maximumRecordedDailyValue)
+    println("maximumRecordedValue: " + maximumRecordedValue)
   
     
     
@@ -636,13 +680,24 @@ class UserVariableApi (implicit val swagger: Swagger) extends ScalatraServlet
 
   
 
-  val userVariablesPostOperation = (apiOperation[Inline_response_200_22]("userVariablesPost")
+  val userVariablesPostOperation = (apiOperation[Inline_response_200_30]("userVariablesPost")
       summary "Store UserVariable"
-      parameters(bodyParam[UserVariable]("body").description("").optional)
+      parameters(queryParam[String]("accessToken").description("").optional,
+        bodyParam[UserVariable]("body").description("").optional)
   )
 
   post("/userVariables",operation(userVariablesPostOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
                 
@@ -654,9 +709,10 @@ bodyParam[UserVariable]("body").description("").optional
 
   
 
-  val userVariablesIdGetOperation = (apiOperation[Inline_response_200_22]("userVariablesIdGet")
+  val userVariablesIdGetOperation = (apiOperation[Inline_response_200_30]("userVariablesIdGet")
       summary "Get UserVariable"
-      parameters(pathParam[Int]("id").description(""))
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   get("/userVariables/{id}",operation(userVariablesIdGetOperation)) {
@@ -669,6 +725,16 @@ bodyParam[UserVariable]("body").description("").optional
     
     println("id: " + id)
   
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
   }
 
   
@@ -676,6 +742,7 @@ bodyParam[UserVariable]("body").description("").optional
   val userVariablesIdPutOperation = (apiOperation[Inline_response_200_2]("userVariablesIdPut")
       summary "Update UserVariable"
       parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional,
         bodyParam[UserVariable]("body").description("").optional)
   )
 
@@ -691,6 +758,16 @@ bodyParam[UserVariable]("body").description("").optional
   
     
     
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
+    
+    
                 
 bodyParam[UserVariable]("body").description("").optional
     
@@ -702,7 +779,8 @@ bodyParam[UserVariable]("body").description("").optional
 
   val userVariablesIdDeleteOperation = (apiOperation[Inline_response_200_2]("userVariablesIdDelete")
       summary "Delete UserVariable"
-      parameters(pathParam[Int]("id").description(""))
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   delete("/userVariables/{id}",operation(userVariablesIdDeleteOperation)) {
@@ -714,6 +792,16 @@ bodyParam[UserVariable]("body").description("").optional
 
     
     println("id: " + id)
+  
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
   
   }
 

@@ -1,9 +1,9 @@
 package com.wordnik.client.model
 
-import com.wordnik.client.model.Unit
+import com.wordnik.client.model.Correlation
 
 
 case class Inline_response_200_18 (
-  data: Unit,
+  data: Correlation,
   success: Boolean
 )

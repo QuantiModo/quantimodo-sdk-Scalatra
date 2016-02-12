@@ -1,9 +1,9 @@
 package com.wordnik.client.model
 
-import com.wordnik.client.model.Correlation
+import com.wordnik.client.model.Update
 
 
 case class Inline_response_200_7 (
-  data: List[Correlation],
+  data: List[Update],
   success: Boolean
 )

@@ -1,9 +1,9 @@
 package com.wordnik.client.model
 
-import com.wordnik.client.model.VariableCategory
+import com.wordnik.client.model.TrackingReminder
 
 
 case class Inline_response_200_23 (
-  data: List[VariableCategory],
+  data: TrackingReminder,
   success: Boolean
 )

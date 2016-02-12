@@ -1,8 +1,8 @@
 package com.wordnik.client.api
 
+import com.wordnik.client.model.Inline_response_200_17
 import java.math.BigDecimal
-import com.wordnik.client.model.Inline_response_200_7
-import com.wordnik.client.model.Inline_response_200_8
+import com.wordnik.client.model.Inline_response_200_18
 import com.wordnik.client.model.Correlation
 import com.wordnik.client.model.Inline_response_200_2
 
@@ -32,9 +32,10 @@ class CorrelationApi (implicit val swagger: Swagger) extends ScalatraServlet
   }
   
 
-  val correlationsGetOperation = (apiOperation[Inline_response_200_7]("correlationsGet")
+  val correlationsGetOperation = (apiOperation[Inline_response_200_17]("correlationsGet")
       summary "Get all Correlations"
-      parameters(queryParam[Int]("timestamp").description("").optional,
+      parameters(queryParam[String]("accessToken").description("").optional,
+        queryParam[Int]("timestamp").description("").optional,
         queryParam[Int]("userId").description("").optional,
         queryParam[BigDecimal]("correlation").description("").optional,
         queryParam[Int]("causeId").description("").optional,
@@ -64,6 +65,16 @@ class CorrelationApi (implicit val swagger: Swagger) extends ScalatraServlet
 
   get("/correlations",operation(correlationsGetOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
         
@@ -328,13 +339,24 @@ class CorrelationApi (implicit val swagger: Swagger) extends ScalatraServlet
 
   
 
-  val correlationsPostOperation = (apiOperation[Inline_response_200_8]("correlationsPost")
+  val correlationsPostOperation = (apiOperation[Inline_response_200_18]("correlationsPost")
       summary "Store Correlation"
-      parameters(bodyParam[Correlation]("body").description("").optional)
+      parameters(queryParam[String]("accessToken").description("").optional,
+        bodyParam[Correlation]("body").description("").optional)
   )
 
   post("/correlations",operation(correlationsPostOperation)) {
     
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
     
     
                 
@@ -346,9 +368,10 @@ bodyParam[Correlation]("body").description("").optional
 
   
 
-  val correlationsIdGetOperation = (apiOperation[Inline_response_200_8]("correlationsIdGet")
-      summary "Get Correlation"
-      parameters(pathParam[Int]("id").description(""))
+  val correlationsIdGetOperation = (apiOperation[Inline_response_200_18]("correlationsIdGet")
+      summary "Get Correlation Details"
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   get("/correlations/{id}",operation(correlationsIdGetOperation)) {
@@ -361,6 +384,16 @@ bodyParam[Correlation]("body").description("").optional
     
     println("id: " + id)
   
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
   }
 
   
@@ -368,6 +401,7 @@ bodyParam[Correlation]("body").description("").optional
   val correlationsIdPutOperation = (apiOperation[Inline_response_200_2]("correlationsIdPut")
       summary "Update Correlation"
       parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional,
         bodyParam[Correlation]("body").description("").optional)
   )
 
@@ -383,6 +417,16 @@ bodyParam[Correlation]("body").description("").optional
   
     
     
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
+  
+    
+    
                 
 bodyParam[Correlation]("body").description("").optional
     
@@ -394,7 +438,8 @@ bodyParam[Correlation]("body").description("").optional
 
   val correlationsIdDeleteOperation = (apiOperation[Inline_response_200_2]("correlationsIdDelete")
       summary "Delete Correlation"
-      parameters(pathParam[Int]("id").description(""))
+      parameters(pathParam[Int]("id").description(""),
+        queryParam[String]("accessToken").description("").optional)
   )
 
   delete("/correlations/{id}",operation(correlationsIdDeleteOperation)) {
@@ -406,6 +451,16 @@ bodyParam[Correlation]("body").description("").optional
 
     
     println("id: " + id)
+  
+    
+    
+        
+      
+      val accessToken = params.getAs[String]("accessToken")
+            
+
+    
+    println("accessToken: " + accessToken)
   
   }
 
